@@ -14,6 +14,7 @@ for state_key in all_states.keys():
 
 # Create a new State
 new_state = State()
+print(new_state)
 new_state.name = "California"
 fs.new(new_state)
 fs.save()
