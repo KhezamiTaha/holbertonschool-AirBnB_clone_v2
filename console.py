@@ -149,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
                 setattr(new_instance, key, value) # how to convert a string to a number 
             except AttributeError:
                 continue
-        storage.save()
+        storage.new(new_instance)
         print(new_instance.id)
         storage.save()
 
@@ -233,11 +233,12 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            objects = storage.all()
+            for k, v in objects.items():
                 print_list.append(str(v))
 
         print(print_list)
