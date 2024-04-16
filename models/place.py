@@ -10,8 +10,8 @@ from sqlalchemy import Table
 
 
 place_amenity = Table('place_amenity', Base.metadata,
-    Column('place_id', String(60), ForeignKey=('places.id'), nullable=False),
-    Column('amenity_id', String(60), ForeignKey=('amenities.id'), nullable=False)
+    Column('place_id', String(60), ForeignKey('places.id'), nullable=False),
+    Column('amenity_id', String(60), ForeignKey('amenities.id'), nullable=False)
 )
 
 
@@ -46,8 +46,9 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             """ getter returns list of amenities """
+            from models import storage
             list_of_amenities = []
-            all_amenities = models.storage.all(Amenity)
+            all_amenities = storage.all("Amenity")
             for key, obj in all_amenities.items():
                 if key in self.amentiy_ids:
                     list_of_amenities.append(obj)
