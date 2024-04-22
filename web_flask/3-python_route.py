@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Console Module """
+""" starting a Flask web application """
 
 from flask import Flask
 
@@ -27,6 +27,7 @@ def cIsFun(text):
 def pythonIsFun(text="is cool"):
     modified_text = text.replace('_', ' ')
     return 'Python {}'.format(modified_text)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
