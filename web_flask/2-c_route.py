@@ -15,6 +15,7 @@ def index():
 def holberton():
     return 'HBNB'
 
+
 @app.route("/c/<text>", strict_slashes=False)
 def cIsFun(text):
     modified_text = text.replace('_', ' ')
