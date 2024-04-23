@@ -5,6 +5,7 @@ import os
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 class DBStorage:
     """This class manages storage of hbnb models in MySQL"""
     __engine = None
@@ -41,11 +42,11 @@ class DBStorage:
         return dictonary
 
     def new(self, obj):
-        """add the object to the current database session (self.__session)"""
+        """add the object to the current database session"""
         self.__session.add(obj)
 
     def save(self):
-        """ commit all changes of the current database session (self.__session)"""
+        """ commit all changes of the current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
@@ -62,7 +63,8 @@ class DBStorage:
         from models.amenity import Amenity
         from models.review import Review
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         self.__session = scoped_session(session_factory)
 
     def close(self):
