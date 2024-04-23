@@ -27,7 +27,10 @@ class FileStorage:
             dict_all = {}
             for key in self.__objects:
                 class_name, id = key.split(".")
-                if class_name == cls.__name__:
+                if type(cls) is str:
+                    if class_name == cls:
+                        dict_all[key] = self.__objects[key]
+                elif class_name == cls.__name__:
                     dict_all[key] = self.__objects[key]
             return dict_all
 
@@ -68,3 +71,7 @@ class FileStorage:
                         self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+
+    def close(self):
+        """Loads storage dictionary from file"""
+        self.reload()
